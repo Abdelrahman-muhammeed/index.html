@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz and Surprise!</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    .question {
+      margin: 20px 0;
+      display: none;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    iframe {
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Answer the Questions</h1>
+  <div id="quiz">
+    <div class="question" id="q1-container">
+      <label for="q1">What is 2 + 2?</label><br>
+      <input type="text" id="q1" placeholder="Your answer">
+      <button onclick="checkFirstQuestion()">Submit Answer</button>
+    </div>
+    <div class="question" id="q2-container">
+      <label for="q2">What is the capital of France?</label><br>
+      <input type="text" id="q2" placeholder="Your answer">
+      <button onclick="checkSecondQuestion()">Submit Answer</button>
+    </div>
+    <p id="result"></p>
+  </div>
+  <iframe id="rickroll" width="1600" height="900" 
+          src="https://r.mtdv.me/4qcR-RGvK1" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+  </iframe>
+
+  <script>
+    document.getElementById('q1-container').style.display = 'block'; // Show the first question initially
+
+    function checkFirstQuestion() {
+      const q1 = document.getElementById('q1').value.trim();
+      const result = document.getElementById('result');
+
+      if (q1 === "4") {
+        result.textContent = "Correct! Now answer the next question.";
+        document.getElementById('q1-container').style.display = 'none'; // Hide the first question
+        document.getElementById('q2-container').style.display = 'block'; // Show the second question
+      } else {
+        result.textContent = "Oops! That's incorrect. Try again.";
+      }
+    }
+
+    function checkSecondQuestion() {
+      const q2 = document.getElementById('q2').value.trim().toLowerCase();
+      const result = document.getElementById('result');
+      const rickroll = document.getElementById('rickroll');
+
+      if (q2 === "paris") {
+        result.textContent = "Great job! Enjoy your surprise!";
+        rickroll.style.display = "block"; // Show the video
+        rickroll.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*'); // Autoplay the video
+      } else {
+        result.textContent = "Oops! That's incorrect. Try again.";
+      }
+    }
+  </script>
+</body>
+</html>
